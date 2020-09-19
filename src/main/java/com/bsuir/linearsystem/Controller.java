@@ -1,5 +1,9 @@
 package com.bsuir.linearsystem;
 
+import com.bsuir.linearsystem.logic.LinearSystemService;
+import com.bsuir.linearsystem.logic.impl.LinearSystemServiceImpl;
+import com.bsuir.linearsystem.logic.strategies.LinearSystemStrategy;
+import com.bsuir.linearsystem.logic.strategies.impl.GaussStrategy;
 import com.bsuir.linearsystem.model.Matrix;
 import com.bsuir.linearsystem.model.Vector;
 import javafx.fxml.FXML;
@@ -9,7 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Controller {
-    private final LinearSystemService linearSystemService = new LinearSystemServiceImpl();
+    private final LinearSystemStrategy gaussStrategy = new GaussStrategy();
+    private final LinearSystemService linearSystemService = new LinearSystemServiceImpl(gaussStrategy);
 
     @FXML
     private TextField qField;
@@ -41,10 +46,12 @@ public class Controller {
     public void solveSystemAndCalculateDiscrepancy() {
         Matrix aMatrix = createAMatrixAndFillQValue(resolveDoubleFieldValue(qField));
         Vector bVector = createBVectorAndFillDValue(resolveDoubleFieldValue(dField));
-        Vector xVector = linearSystemService.solveSystem(aMatrix, bVector);
+        int n = aMatrix.cols();
+        Vector xVector = new Vector(n);
+        linearSystemService.solveSystem(aMatrix, bVector, xVector, n);
         showResultBox();
         drawResult(xVector);
-        double discrepancy = linearSystemService.calculateDiscrepancy(aMatrix, bVector, xVector);
+        double discrepancy = linearSystemService.calculateDiscrepancy(aMatrix, bVector, xVector, n);
         drawDiscrepancy(discrepancy);
     }
 

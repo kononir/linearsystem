@@ -13,6 +13,12 @@ public class Matrix implements Cloneable {
         this.cols = arr[0].length;
     }
 
+    public Matrix(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        this.arr = new double[rows][cols];
+    }
+
     public int rows() {
         return rows;
     }

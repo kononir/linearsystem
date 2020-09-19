@@ -2,7 +2,9 @@ package com.bsuir.linearsystem.model;
 
 import lombok.SneakyThrows;
 
-public class Vector implements Cloneable {
+import java.util.Iterator;
+
+public class Vector implements Cloneable, Iterable<Double> {
     private double[] vec;
     private final int len;
 
@@ -34,5 +36,29 @@ public class Vector implements Cloneable {
         Vector copy = (Vector) super.clone();
         copy.vec = vec.clone();
         return copy;
+    }
+
+    public Iterator<Double> iterator() {
+        return new VectorIterator();
+    }
+
+    class VectorIterator implements Iterator<Double> {
+        int curr;
+
+        public VectorIterator() {
+            this.curr = 0;
+        }
+
+        public boolean hasNext() {
+            return curr < len;
+        }
+
+        public Double next() {
+            return vec[curr];
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
