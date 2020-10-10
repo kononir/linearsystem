@@ -11,7 +11,7 @@ public class SquareRootStrategy implements LinearSystemStrategy {
         for (int k = 0; k < n; k++) {
             double del = aMatrix.get(k, k);
             if (k != 0) {
-                for (int i = 0; i < k -1; i++) {
+                for (int i = 0; i < k - 1; i++) {
                     double sik = sMatrix.get(i, k);
                     del = del - dVector.get(i) * sik * sik;
                 }

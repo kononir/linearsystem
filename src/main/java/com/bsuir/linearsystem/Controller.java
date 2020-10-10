@@ -4,6 +4,7 @@ import com.bsuir.linearsystem.logic.LinearSystemService;
 import com.bsuir.linearsystem.logic.impl.LinearSystemServiceImpl;
 import com.bsuir.linearsystem.logic.strategies.LinearSystemStrategy;
 import com.bsuir.linearsystem.logic.strategies.impl.GaussStrategy;
+import com.bsuir.linearsystem.logic.strategies.impl.SquareRootStrategy;
 import com.bsuir.linearsystem.model.Matrix;
 import com.bsuir.linearsystem.model.Vector;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Controller {
-    private final LinearSystemStrategy gaussStrategy = new GaussStrategy();
+    private final LinearSystemStrategy gaussStrategy = new SquareRootStrategy();
     private final LinearSystemService linearSystemService = new LinearSystemServiceImpl(gaussStrategy);
 
     @FXML

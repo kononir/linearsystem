@@ -8,9 +8,9 @@ public class Matrix implements Cloneable {
     private final int cols;
 
     public Matrix(double[][] arr) {
-        this.arr = arr;
         this.rows = arr.length;
         this.cols = arr[0].length;
+        this.arr = deepCopyArr(arr);
     }
 
     public Matrix(int rows, int cols) {
@@ -39,7 +39,15 @@ public class Matrix implements Cloneable {
     @Override
     public Matrix clone() {
         Matrix copy = (Matrix) super.clone();
-        copy.arr = arr.clone();
+        copy.arr = deepCopyArr(arr);
         return copy;
+    }
+
+    private double[][] deepCopyArr(double[][] arr) {
+        double[][] copyArr = new double[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            copyArr[i] = arr[i].clone();
+        }
+        return copyArr;
     }
 }

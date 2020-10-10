@@ -9,7 +9,7 @@ public class Vector implements Cloneable, Iterable<Double> {
     private final int len;
 
     public Vector(double[] vec) {
-        this.vec = vec;
+        this.vec = vec.clone();
         this.len = vec.length;
     }
 
