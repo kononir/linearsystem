@@ -3,6 +3,7 @@ package com.bsuir.linearsystem.model;
 import lombok.SneakyThrows;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class Vector implements Cloneable, Iterable<Double> {
     private double[] vec;
@@ -16,6 +17,11 @@ public class Vector implements Cloneable, Iterable<Double> {
     public Vector(int len) {
         this.len = len;
         this.vec = new double[len];
+    }
+
+    public Vector(List<Double> list) {
+        this.len = list.size();
+        this.vec = createArrayFromList(list);
     }
 
     public int len() {
@@ -54,11 +60,21 @@ public class Vector implements Cloneable, Iterable<Double> {
         }
 
         public Double next() {
-            return vec[curr];
+            double val = vec[curr];
+            curr++;
+            return val;
         }
 
         public void remove() {
             throw new UnsupportedOperationException();
         }
+    }
+
+    private static double[] createArrayFromList(List<Double> list) {
+        double[] arr = new double[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = list.get(i);
+        }
+        return arr;
     }
 }
